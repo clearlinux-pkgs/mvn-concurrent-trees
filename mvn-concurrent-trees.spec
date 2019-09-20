@@ -4,12 +4,15 @@
 #
 Name     : mvn-concurrent-trees
 Version  : 2.6.1
-Release  : 1
+Release  : 2
 URL      : https://github.com/npgall/concurrent-trees/archive/2.6.1.tar.gz
 Source0  : https://github.com/npgall/concurrent-trees/archive/2.6.1.tar.gz
+Source1  : https://repo1.maven.org/maven2/com/googlecode/concurrent-trees/concurrent-trees/2.6.1/concurrent-trees-2.6.1.jar
+Source2  : https://repo1.maven.org/maven2/com/googlecode/concurrent-trees/concurrent-trees/2.6.1/concurrent-trees-2.6.1.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
+Requires: mvn-concurrent-trees-data = %{version}-%{release}
 Requires: mvn-concurrent-trees-license = %{version}-%{release}
 BuildRequires : apache-maven
 BuildRequires : buildreq-mvn
@@ -18,6 +21,14 @@ BuildRequires : buildreq-mvn
 [![Build Status](https://travis-ci.org/npgall/concurrent-trees.svg?branch=master)](https://travis-ci.org/npgall/concurrent-trees)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.googlecode.concurrent-trees/concurrent-trees/badge.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.googlecode.concurrent-trees%22%20AND%20a%3Aconcurrent-trees)
 [![Reference Status](https://www.versioneye.com/java/com.googlecode.concurrent-trees:concurrent-trees/reference_badge.svg?style=flat-square)](https://www.versioneye.com/java/com.googlecode.concurrent-trees:concurrent-trees/references)
+
+%package data
+Summary: data components for the mvn-concurrent-trees package.
+Group: Data
+
+%description data
+data components for the mvn-concurrent-trees package.
+
 
 %package license
 Summary: license components for the mvn-concurrent-trees package.
@@ -35,9 +46,20 @@ license components for the mvn-concurrent-trees package.
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/mvn-concurrent-trees
 cp LICENSE.txt %{buildroot}/usr/share/package-licenses/mvn-concurrent-trees/LICENSE.txt
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/googlecode/concurrent-trees/concurrent-trees/2.6.1
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/com/googlecode/concurrent-trees/concurrent-trees/2.6.1/concurrent-trees-2.6.1.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/com/googlecode/concurrent-trees/concurrent-trees/2.6.1
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/com/googlecode/concurrent-trees/concurrent-trees/2.6.1/concurrent-trees-2.6.1.pom
+
 
 %files
 %defattr(-,root,root,-)
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/java/.m2/repository/com/googlecode/concurrent-trees/concurrent-trees/2.6.1/concurrent-trees-2.6.1.jar
+/usr/share/java/.m2/repository/com/googlecode/concurrent-trees/concurrent-trees/2.6.1/concurrent-trees-2.6.1.pom
 
 %files license
 %defattr(0644,root,root,0755)
